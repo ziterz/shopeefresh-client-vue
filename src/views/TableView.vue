@@ -24,16 +24,16 @@ defineProps({
                 <td width="400px">
                   <div class="flex items-center">
                     <img
-                      :src="product.image"
-                      :alt="product.name"
+                      :src="product.Image ?? '-'"
+                      :alt="product.Name ?? '-'"
                       class="h-32 w-32 object-cover p-4"
                     />
-                    <span class="font-bold">{{ product.name }}</span>
+                    <span class="font-bold">{{ product.Name ?? '-' }}</span>
                   </div>
                 </td>
-                <td>#{{ product.id }}</td>
-                <td>Rp{{ product.price }}</td>
-                <td>{{ product.stock }}</td>
+                <td>#{{ product.ID ?? 0 }}</td>
+                <td>Rp{{ product.Price ?? 0 }}</td>
+                <td>{{ product.Stock ?? 0 }}</td>
                 <td>
                   <div class="mx-auto w-12">
                     <div class="text-left font-medium text-lime-500">
