@@ -14,8 +14,25 @@ export const useProductsStore = defineStore('products', () => {
     }
   }
 
+  async function addProduct(product) {
+    try {
+      const response = await fetch('http://localhost:3000/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+      })
+      const data = await response.json()
+      products.value = [...products.value, data.product]
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
     products,
-    fetchProducts
+    fetchProducts,
+    addProduct
   }
 })
