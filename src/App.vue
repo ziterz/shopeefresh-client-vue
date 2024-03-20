@@ -108,71 +108,33 @@ const products = ref([
     stock: 100
   }
 ])
+
+function logout() {
+  localStorage.removeItem('access_token')
+}
 </script>
 
 <template>
   <header class="sticky top-0 bg-lime-500">
     <nav class="container relative mx-auto py-5">
-      <img src="./assets/shopeefresh-logo.svg" alt="Shopee Fresh" width="200" height="auto" />
+      <router-link to="/">
+        <img src="./assets/shopeefresh-logo.svg" alt="Shopee Fresh" width="200" height="auto" />
+      </router-link>
       <ul class="absolute inset-y-0 right-0 flex items-center gap-4 text-lg font-medium text-white">
         <li>
-          <a href="#">Home</a>
+          <router-link to="/">Home</router-link>
         </li>
         <li>
-          <a href="#">Add Product</a>
+          <router-link to="/product">Add Product</router-link>
         </li>
         <li>
-          <a href="#">Logout</a>
+          <router-link to="" @click="logout()">Logout</router-link>
         </li>
       </ul>
     </nav>
   </header>
   <main>
-    <section>
-      <div class="container mx-auto">
-        <div class="my-5">
-          <div class="h-full bg-white p-5">
-            <table class="w-full table-auto bg-white">
-              <thead class="bg-neutral-100">
-                <tr>
-                  <th class="p-4">Product Name</th>
-                  <th>Product ID</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody class="text-center">
-                <tr v-for="product in products" :key="product.id" class="border">
-                  <td width="400px">
-                    <div class="flex items-center">
-                      <img
-                        :src="product.image"
-                        :alt="product.name"
-                        class="h-32 w-32 object-cover p-4"
-                      />
-                      <span class="font-bold">{{ product.name }}</span>
-                    </div>
-                  </td>
-                  <td>#{{ product.id }}</td>
-                  <td>Rp{{ product.price }}</td>
-                  <td>{{ product.stock }}</td>
-                  <td>
-                    <div class="mx-auto w-12">
-                      <div class="text-left font-medium text-lime-500">
-                        <a href="">Edit</a>
-                        <br />
-                        <a href="">Delete</a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
+    <router-view :products="products" />
   </main>
 </template>
 
