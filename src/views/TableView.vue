@@ -1,7 +1,11 @@
 <script setup>
-defineProps({
-  products: Array
-})
+import { useProductsStore } from '@/stores/product'
+
+const store = useProductsStore()
+
+function deleteProduct(id) {
+  store.deleteProduct(id)
+}
 </script>
 
 <template>
@@ -20,7 +24,7 @@ defineProps({
               </tr>
             </thead>
             <tbody class="text-center">
-              <tr v-for="product in products" :key="product.id" class="border">
+              <tr v-for="product in store.products" :key="product.id" class="border">
                 <td width="400px">
                   <div class="flex items-center">
                     <img
@@ -37,9 +41,15 @@ defineProps({
                 <td>
                   <div class="mx-auto w-12">
                     <div class="text-left font-medium text-lime-500">
-                      <a href="" class="hover:underline">Edit</a>
+                      <router-link
+                        :to="{ name: 'edit', params: { id: product.ID } }"
+                        class="hover:underline"
+                        >Edit</router-link
+                      >
                       <br />
-                      <a href="" class="hover:underline">Delete</a>
+                      <a href="" @click.prevent="deleteProduct(product.ID)" class="hover:underline"
+                        >Delete</a
+                      >
                     </div>
                   </div>
                 </td>

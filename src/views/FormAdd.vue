@@ -1,24 +1,16 @@
 <script setup>
-import { ref } from 'vue'
 import { useProductsStore } from '@/stores/product'
 
 const store = useProductsStore()
-const product = ref({
+const product = {
   Name: '',
   Price: 0,
   Stock: 0,
-  Image: ''
-})
+  Image: 'https://down-id.img.susercontent.com/file/53f6da224fae753c0a714d7d08e5c611_tn'
+}
 
-function submitForm(e) {
-  e.preventDefault()
+function submitForm() {
   store.addProduct(product.value)
-  product.value = {
-    Name: '',
-    Price: 0,
-    Stock: 0,
-    Image: ''
-  }
 }
 </script>
 
@@ -27,7 +19,7 @@ function submitForm(e) {
     <div class="container mx-auto">
       <div class="my-5 w-1/2">
         <h1 class="text-3xl font-medium">New Product</h1>
-        <form @submit="(e) => submitForm(e)">
+        <form @submit.prevent="submitForm()">
           <div class="mt-5 flex flex-col gap-4">
             <div class="flex flex-col">
               <label for="product-name">Product Name</label>
@@ -63,16 +55,14 @@ function submitForm(e) {
               <label for="product-image">Product Image</label>
               <input
                 type="text"
-                id="product-stock"
-                name="product-stock"
+                id="product-image"
+                name="product-image"
                 class="border border-neutral-300 p-2"
                 v-model="product.Image"
               />
             </div>
             <div class="flex flex-col">
-              <button type="submit" class="bg-lime-500 py-2 font-medium text-white">
-                Add Product
-              </button>
+              <button type="submit" class="bg-lime-500 py-2 font-medium text-white">Submit</button>
             </div>
           </div>
         </form>
