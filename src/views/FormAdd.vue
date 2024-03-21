@@ -10,7 +10,7 @@ const product = {
 }
 
 function submitForm() {
-  store.addProduct(product.value)
+  store.addProduct(product)
 }
 </script>
 
